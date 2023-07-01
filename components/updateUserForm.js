@@ -4,6 +4,7 @@ import Success from "./success"
 import Bug from "./bug"
 import { useQuery, useMutation, useQueryClient } from "react-query"
 import { getUser, getUsers, updateUser } from "../lib/helper"
+import { convertToIDR } from "./utils"
 
 export default function UpdateUserForm({ formId, formData, setFormData }){
 
@@ -29,9 +30,9 @@ export default function UpdateUserForm({ formId, formData, setFormData }){
         await UpdateMutation.mutate(updated)
     }
 
-    const convertRupiah = () => {
-        
-    }
+    
+
+
 
     return (
         <form className="grid lg:grid-cols-2 w-4/6 gap-4" onSubmit={handleSubmit}>
@@ -45,7 +46,7 @@ export default function UpdateUserForm({ formId, formData, setFormData }){
                 <input type="text" onChange={setFormData} defaultValue={email} name="email" className="border w-full px-5 py-3 focus:outline-none rounded-md" placeholder="Email" />
             </div>
             <div className="input-type">
-                <input type="text" onChange={setFormData} defaultValue={salary} name="salary" className="border w-full px-5 py-3 focus:outline-none rounded-md" placeholder="Gaji" />
+                <input type="text" onChange={setFormData} defaultValue={convertToIDR(Number(salary))} name="salary" className="border w-full px-5 py-3 focus:outline-none rounded-md" placeholder="Gaji" />
             </div>
             <div className="input-type">
                 <input type="date" onChange={setFormData} defaultValue={date} name="date" className="border px-5 py-3 focus:outline-none rounded-md" placeholder="Gaji" />
@@ -56,13 +57,13 @@ export default function UpdateUserForm({ formId, formData, setFormData }){
                 <div className="form-check">
                     <input type="radio" defaultChecked={status == "Active"} onChange={setFormData} value="Active" id="radioDefault1" name="status" className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300  bg-white checked:bg-green-500 checked:border-green-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" />
                     <label htmlFor="radioDefault1" className="inline-block tet-gray-800">
-                        Aktif
+                        Active
                     </label>
                 </div>
                 <div className="form-check">
                     <input type="radio"  defaultChecked={status !== "Active"}  onChange={setFormData} value="Inactive" id="radioDefault2" name="status" className="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300  bg-white checked:bg-green-500 checked:border-green-500 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" />
                     <label htmlFor="radioDefault2" className="inline-block tet-gray-800">
-                        Tidak Aktif
+                        Inactive
                     </label>
                 </div>
             </div>

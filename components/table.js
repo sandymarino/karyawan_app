@@ -3,6 +3,7 @@ import { getUsers } from "../lib/helper";
 import { useQuery } from 'react-query';
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleChangeAction, updateAction, deleteAction } from '../redux/reducer'
+import { convertToIDR } from "./utils";
 
 export default function Table(){
 
@@ -72,7 +73,7 @@ function Tr({_id, name, avatar, email, salary, date, status }){
             <span>{email || "Unknown"}</span>
         </td>
         <td className="px-16 py-2">
-            <span>{salary || "Unknown"}</span>
+            <span>{convertToIDR(Number(salary)) || "Unknown"}</span>
         </td>
         <td className="px-16 py-2">
             <span>{date || "Unknown"}</span>
